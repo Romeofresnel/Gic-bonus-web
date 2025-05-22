@@ -190,13 +190,15 @@
 
     .right-panel {
       width: 100% !important;
-
+      display: flex !important;
+      align-items: center;
+      flex-direction: column;
       .testimonials-swiper {
         height: auto !important;
         padding: 0 !important;
         overflow: visible !important;
-        display: flex;
-        align-items: center;
+        // display: flex;
+        // align-items: center;
         // FORCER L'AFFICHAGE DE TOUS LES SLIDES SUR MOBILE
         .swiper-slide {
           opacity: 1 !important;
@@ -221,11 +223,11 @@
 
           .testimonial-card {
             width: 100% !important;
-            max-width: 400px !important;
+            max-width: 380px !important;
             height: auto !important;
-            min-height: 250px !important;
+            min-height: 240px !important;
             margin: 0 auto !important;
-            margin-left: -2px !important; // CORRECTION PRINCIPALE
+            margin-right: 0px !important; // CORRECTION PRINCIPALE
             position: relative !important;
             display: block !important;
 
@@ -236,7 +238,7 @@
               gap: 15px !important;
               grid-template-columns: none !important;
               width: 100% !important;
-              height: auto !important;
+              height: 100% !important;
               backdrop-filter: blur(50px);
 
               .quote-icon {
@@ -287,7 +289,7 @@
               height: 150px !important;
               bottom: -55px !important;
               right: 125px !important;
-              background-color: var(--circle);
+              background-color: var(--color-secondary);
             }
           }
         }
