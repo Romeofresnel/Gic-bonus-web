@@ -190,13 +190,14 @@
 
     .right-panel {
       width: 100% !important;
-
+display: flex !important;
+      align-items: center;
+      flex-direction: column;
       .testimonials-swiper {
         height: auto !important;
         padding: 0 !important;
         overflow: visible !important;
-        display: flex;
-        align-items: center;
+        
         // FORCER L'AFFICHAGE DE TOUS LES SLIDES SUR MOBILE
         .swiper-slide {
           opacity: 1 !important;
@@ -225,7 +226,7 @@
             height: auto !important;
             min-height: 250px !important;
             margin: 0 auto !important;
-            margin-left: -20px !important; // CORRECTION PRINCIPALE
+            margin-left: 0px !important; // CORRECTION PRINCIPALE
             position: relative !important;
             display: block !important;
 
