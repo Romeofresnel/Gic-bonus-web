@@ -1,8 +1,8 @@
-@import "./scss/setting.scss";
-@import "./scss/home.scss";
-@import "./scss/apropos.scss";
-@import "./scss/service.scss";
-@import "./scss/map.scss";
-@import "./scss/contact.scss";
-@import "./scss/menu.scss";
-@import "./scss/temoignage.scss";
+@use "./scss/setting" as *;
+@use "./scss/home" as *;
+@use "./scss/apropos" as *;
+@use "./scss/service" as *;
+@use "./scss/map" as *;
+@use "./scss/contact" as *;
+@use "./scss/menu" as *;
+@use "./scss/temoignage" as *;
