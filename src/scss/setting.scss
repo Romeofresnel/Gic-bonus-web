@@ -1,0 +1,73 @@
+:root {
+  --color-principal: #0054a5;
+  --color-secondary: #58b4f6;
+  --circle: #58b4f6;
+  --fond-principal: #ffffff;
+  --text-principal: #1f1f1f;
+  --text-secondary: #4f4f4f;
+  --fond-apropos: #e9edf1;
+  --fond-service: #f8f9fa;
+  --card-service: white;
+  --fond-temoignage: #f0f4f8;
+  --fond-map: white;
+  --background: linear-gradient(
+    -135deg,
+    var(--color-secondary) 0%,
+    var(--fond-principal) 100%
+  );
+  --background-1: linear-gradient(135deg, #f0f4f8, #ffffff);
+}
+[data-theme="dark"] {
+  --color-principal: #f6f6f7;
+  --color-secondary: #58b4f6;
+  --fond-principal: #ffffff;
+  --text-principal: #ebebeb;
+  --circle: #ececec;
+  --text-secondary: #c7c7c7;
+  --fond-apropos: #1a2639;
+  --fond-service: #121f33;
+  --card-service: #192a44;
+  --fond-temoignage: #192a44;
+  --fond-map: #1b2738;
+  --background: linear-gradient(-135deg, #192a44 0%, #58b4f6 100%);
+  --background-1: #192a44;
+}
+::-webkit-scrollbar {
+  width: 4px;
+  display: none;
+}
+::-webkit-scrollbar-button {
+  background-color: #9ae099;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #3d3d3dd9;
+  border-radius: 10px;
+  max-width: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #3d3d3dd9;
+}
+::-webkit-scrollbar-track {
+  background-color: #2f333c;
+  padding: 2px;
+}
+
+@font-face {
+  font-family: "font-1";
+  src: url(./Poppine/Poppins-Regular.ttf);
+}
+@font-face {
+  font-family: "font-2";
+  src: url(./roboto/Roboto-Regular.ttf);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.container-web-site {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  display: block;
+}

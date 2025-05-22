@@ -1,0 +1,380 @@
+.testimonials-section {
+  // Conteneur principal de la section témoignages
+  display: grid;
+  grid-template-columns: 45% 55%;
+  align-items: center;
+  padding: 4rem 2rem;
+  background: var(--background-1);
+  flex-wrap: wrap;
+  width: 100%;
+  height: 500px;
+
+  .left-panel {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #222;
+      font-family: "font-1";
+      font-size: 60px;
+      color: var(--color-secondary);
+    }
+
+    p {
+      font-size: 22px;
+      color: var(--text-principal);
+      line-height: 1.6;
+      font-family: "font-2";
+      width: 100%;
+      margin-top: 80px;
+    }
+  }
+
+  .right-panel {
+    width: 100%;
+    position: relative;
+
+    .testimonials-swiper {
+      height: 300px;
+      padding: 0 22px;
+
+      .swiper-slide {
+        transition: transform 0.5s ease, opacity 0.5s ease;
+        opacity: 0.4;
+        transform: scale(0.55);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.swiper-slide-active {
+          opacity: 1;
+          transform: scale(1);
+          z-index: 2;
+        }
+
+        .testimonial-card {
+          position: relative;
+          overflow: hidden;
+          background: rgba(255, 255, 255, 0.116);
+          // border: 1px solid rgba(255, 255, 255, 0.5);
+          border-radius: 1.5rem;
+          width: 100%;
+          height: 160px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.096);
+          text-align: center;
+          transition: all 0.3s ease;
+
+          .testimonial-contents {
+            width: 100%;
+            height: 100%;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 25% 75%;
+            z-index: 2;
+            position: relative;
+
+            .quote-icon {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              .img {
+                width: 100px;
+                height: 100px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.144);
+                border-radius: 100%;
+
+                img {
+                  width: 100%;
+                  height: 100%;
+                  border-radius: 100%;
+                  object-fit: cover;
+                }
+              }
+            }
+
+            .testimonial-content {
+              width: 100%;
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+
+              section {
+                width: 100%;
+                display: flex;
+                align-items: center;
+
+                h4 {
+                  text-align: left;
+                  font-size: 20px;
+                  letter-spacing: 1.2px;
+                  margin-top: 10px;
+                  color: var(--color-secondary);
+                  font-family: "font-1";
+                }
+
+                span {
+                  color: var(--text-principal);
+                  font-family: "font-1";
+                  margin-top: 15px;
+                  margin-left: 10px;
+                }
+              }
+
+              p {
+                text-align: left;
+                font-size: 17px;
+                margin-top: 10px;
+                width: 100%;
+                color: var(--text-principal);
+                line-height: 22px;
+                font-family: "font-2";
+              }
+            }
+          }
+
+          .circle {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 5px solid var(--circle);
+            border-radius: 100%;
+            bottom: -40px;
+            right: -50px;
+            z-index: 1;
+          }
+        }
+      }
+    }
+
+    // Boutons de navigation - cachés sur desktop
+    .navigation-buttons {
+      display: none;
+    }
+  }
+}
+
+// Media query pour mobile - VERSION CORRIGÉE
+@media screen and (max-width: 768px) {
+  .testimonials-section {
+    width: 100% !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: none !important;
+    padding: 20px !important;
+    gap: 30px;
+
+    .left-panel {
+      width: 100% !important;
+      height: auto !important;
+      text-align: center;
+
+      h2 {
+        font-size: 45px !important;
+        margin-bottom: 15px !important;
+        margin-top: 0 !important;
+      }
+
+      p {
+        margin-top: 10px !important;
+        font-size: 18px !important;
+        line-height: 1.5 !important;
+      }
+    }
+
+    .right-panel {
+      width: 100% !important;
+
+      .testimonials-swiper {
+        height: auto !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        display: flex;
+        align-items: center;
+        // FORCER L'AFFICHAGE DE TOUS LES SLIDES SUR MOBILE
+        .swiper-slide {
+          opacity: 1 !important;
+          transform: none !important;
+          scale: 1 !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          display: block !important;
+          margin: 0 !important;
+          padding: 0 10px !important;
+
+          // Cibler spécifiquement les slides actifs ET non-actifs
+          &.swiper-slide-active,
+          &.swiper-slide-next,
+          &.swiper-slide-prev,
+          &:not(.swiper-slide-active) {
+            opacity: 1 !important;
+            transform: none !important;
+            scale: 1 !important;
+            display: block !important;
+          }
+
+          .testimonial-card {
+            width: 100% !important;
+            max-width: 400px !important;
+            height: auto !important;
+            min-height: 250px !important;
+            margin: 0 auto !important;
+            margin-left: -2px !important; // CORRECTION PRINCIPALE
+            position: relative !important;
+            display: block !important;
+
+            .testimonial-contents {
+              display: flex !important;
+              flex-direction: column !important;
+              padding: 20px !important;
+              gap: 15px !important;
+              grid-template-columns: none !important;
+              width: 100% !important;
+              height: auto !important;
+              backdrop-filter: blur(50px);
+
+              .quote-icon {
+                align-self: center !important;
+                width: 100% !important;
+                justify-content: center !important;
+
+                .img {
+                  width: 80px !important;
+                  height: 80px !important;
+                }
+              }
+
+              .testimonial-content {
+                text-align: center !important;
+                width: 100% !important;
+                section {
+                  justify-content: center !important;
+                  flex-direction: column !important;
+                  gap: 5px !important;
+                  width: 100% !important;
+
+                  h4 {
+                    text-align: center !important;
+                    font-size: 18px !important;
+                    margin: 0 !important;
+                  }
+
+                  span {
+                    text-align: center !important;
+                    margin: 0 !important;
+                    font-size: 14px !important;
+                  }
+                }
+
+                p {
+                  text-align: center !important;
+                  font-size: 16px !important;
+                  margin-top: 15px !important;
+                  line-height: 1.4 !important;
+                  width: 100% !important;
+                }
+              }
+            }
+
+            .circle {
+              width: 150px !important;
+              height: 150px !important;
+              bottom: -55px !important;
+              right: 125px !important;
+              background-color: var(--circle);
+            }
+          }
+        }
+
+        // Swiper wrapper spécifique pour mobile
+        .swiper-wrapper {
+          display: flex !important;
+          align-items: stretch !important;
+        }
+      }
+
+      // Boutons de navigation - visibles sur mobile
+      .navigation-buttons {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0 0px !important;
+        margin-top: 20px !important;
+        width: 100% !important;
+
+        .swiper-button-prev,
+        .swiper-button-next {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          width: 50px !important;
+          height: 50px !important;
+          background: var(--color-secondary, #007bff) !important;
+          color: white !important;
+          border: none !important;
+          border-radius: 50% !important;
+          cursor: pointer !important;
+          transition: all 0.3s ease !important;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+          position: static !important;
+          margin: 0 !important;
+
+          &:hover {
+            background: var(--color-secondary-dark, #0056b3) !important;
+            transform: scale(1.1) !important;
+          }
+
+          &:active {
+            transform: scale(0.95) !important;
+          }
+
+          svg {
+            width: 24px !important;
+            height: 24px !important;
+          }
+
+          // Supprimer les styles par défaut de Swiper
+          &:after {
+            content: none !important;
+          }
+        }
+      }
+    }
+  }
+
+  // Style pour la pagination sur mobile
+  .swiper-pagination {
+    position: relative !important;
+    bottom: auto !important;
+    margin-top: 15px !important;
+    text-align: center !important;
+
+    .swiper-pagination-bullet {
+      background: var(--color-secondary, #007bff) !important;
+      opacity: 0.5 !important;
+      width: 10px !important;
+      height: 10px !important;
+      margin: 0 5px !important;
+    }
+
+    .swiper-pagination-bullet-active {
+      opacity: 1 !important;
+      transform: scale(1.2) !important;
+    }
+  }
+
+  // Override des styles Swiper par défaut sur mobile
+  .swiper {
+    overflow: visible !important;
+  }
+
+  .swiper-slide {
+    flex-shrink: 0 !important;
+  }
+}
