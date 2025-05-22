@@ -222,9 +222,9 @@ display: flex !important;
 
           .testimonial-card {
             width: 100% !important;
-            max-width: 400px !important;
+            max-width: 380px !important;
             height: auto !important;
-            min-height: 250px !important;
+            min-height: 240px !important;
             margin: 0 auto !important;
             margin-left: 0px !important; // CORRECTION PRINCIPALE
             position: relative !important;
@@ -237,7 +237,7 @@ display: flex !important;
               gap: 15px !important;
               grid-template-columns: none !important;
               width: 100% !important;
-              height: auto !important;
+              height: 100% !important;
               backdrop-filter: blur(50px);
 
               .quote-icon {
@@ -288,7 +288,7 @@ display: flex !important;
               height: 150px !important;
               bottom: -55px !important;
               right: 125px !important;
-              background-color: var(--circle);
+              background-color: var(--color-secondary);
             }
           }
         }
