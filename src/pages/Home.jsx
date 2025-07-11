@@ -49,6 +49,7 @@ export default function Home() {
     setTheme(newTheme);
   };
 
+
   // Appliquer le thème et le sauvegarder
   useEffect(() => {
     document.body.setAttribute("data-theme", theme);
@@ -205,10 +206,19 @@ export default function Home() {
       iconsRef.current.push(el);
     }
   };
-
+  function handleClose() {
+    setMenus(false);
+    formRef.current.reset(); // Réinitialiser le formulaire si nécessaire
+  }
+  useEffect(() => {
+    const propos = document.querySelector("#root");
+    propos.addEventListener("click", (e) => {
+      e.target === e.currentTarget && handleClose() && e.stopPropagation()
+    });
+  }, [])
   return (
     <>
-      <div className="home-page-container" id="accueil">
+      <div className="home-page-container" id="accueil" onClick={(e) => menus ? setMenus(false) : ''}>
         <div className="container">
           <nav ref={navRef}>
             <div className="logo" ref={logoRef}>
@@ -229,7 +239,6 @@ export default function Home() {
                   className="menu"
                   onClick={() => {
                     setMenus(true);
-                    console.log(<Menus />);
                   }}
                 />
               )}
@@ -258,11 +267,11 @@ export default function Home() {
               dans la transformation technologique et la montée en compétences.
             </h1>
             <div className="btns" ref={btnsRef}>
-              <a href="#">
+              <a href="#contact">
                 <Settings />
                 <span>Nos Services</span>
               </a>
-              <a href="#">
+              <a href="#services">
                 <Phone />
                 <span>Nous Contacter</span>
               </a>
@@ -286,10 +295,8 @@ export default function Home() {
         <a href="#accueil" className="a">
           <FontAwesomeIcon icon={faArrowUp} className="arrow" />
         </a>
-        {menus === true && (
-          <>
-            <Menus />
-          </>
+        {menus && (
+          <Menus aff={handleClose} />
         )}
       </div>
     </>

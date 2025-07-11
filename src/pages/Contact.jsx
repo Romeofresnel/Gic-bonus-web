@@ -247,7 +247,6 @@ export default function Contact() {
               <a href="#propos">A Propos</a>
               <a href="#services">Nos services</a>
               <a href="#temoignage">Temoignage</a>
-              <a href="#map">Localisation</a>
               <a onClick={() => setAff(true)}>Contact</a>
             </ul>
           </div>
