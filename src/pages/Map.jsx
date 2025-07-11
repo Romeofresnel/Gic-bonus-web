@@ -2,116 +2,177 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Map() {
   // Références pour les éléments à animer
   const titleRef = useRef(null);
   const sectionRef = useRef(null);
-
   const textRef = useRef(null);
   const mapRef = useRef(null);
   const circleRef = useRef(null);
   const icon1Ref = useRef(null);
   const icon2Ref = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !isVisible) {
-          setIsVisible(true);
-          playAnimation(); // <--- l'animation commence ici
-          observer.disconnect();
-        }
-      },
-      {
-        threshold: 0.4,
-        rootMargin: "0px",
-      }
-    );
+    const ctx = gsap.context(() => {
+      // 1. Cacher tous les éléments au départ
+      gsap.set(titleRef.current, {
+        opacity: 0,
+        y: -30
+      });
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+      gsap.set(textRef.current, {
+        opacity: 0,
+        y: -20
+      });
+
+      gsap.set(mapRef.current, {
+        opacity: 0,
+        scale: 0.8
+      });
+
+      gsap.set(circleRef.current, {
+        opacity: 0,
+        scale: 0.2
+      });
+
+      gsap.set(icon1Ref.current, {
+        opacity: 0,
+        y: 200,
+        rotation: -30
+      });
+
+      gsap.set(icon2Ref.current, {
+        opacity: 0,
+        scale: 0.8
+      });
+
+      // 2. Animation du titre
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top 80%",
+        onEnter: () => {
+          gsap.to(titleRef.current, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out"
+          });
+        },
+        once: true
+      });
+
+      // 3. Animation du texte
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top 75%",
+        onEnter: () => {
+          gsap.to(textRef.current, {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power2.out"
+          });
+        },
+        once: true
+      });
+
+      // 4. Animation de la carte
+      ScrollTrigger.create({
+        trigger: mapRef.current,
+        start: "top 85%",
+        onEnter: () => {
+          gsap.to(mapRef.current, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            ease: "power1.out"
+          });
+        },
+        once: true
+      });
+
+      // 5. Animation du cercle décoratif
+      ScrollTrigger.create({
+        trigger: circleRef.current,
+        start: "top 85%",
+        onEnter: () => {
+          gsap.to(circleRef.current, {
+            opacity: 1,
+            scale: 1,
+            duration: 1,
+            ease: "bounce.out"
+          });
+        },
+        once: true
+      });
+
+      // 6. Animation des icônes
+      ScrollTrigger.create({
+        trigger: icon1Ref.current,
+        start: "top 85%",
+        onEnter: () => {
+          const tl = gsap.timeline();
+
+          tl.to(icon1Ref.current, {
+            opacity: 1,
+            y: 0,
+            rotation: 0,
+            duration: 1.2,
+            ease: "bounce.out"
+          });
+
+          tl.to(icon2Ref.current, {
+            opacity: 0.5,
+            scale: 1,
+            duration: 0.5,
+            ease: "power2.out"
+          }, "-=0.3");
+
+          // Animation flottante continue pour icon1
+          tl.to(icon1Ref.current, {
+            y: "+=10",
+            duration: 2,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+          });
+        },
+        once: true
+      });
+
+    }, sectionRef);
+
+    // Gestion du responsive
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
-    handleResize(); // check on mount
+    handleResize();
     window.addEventListener("resize", handleResize);
+
     return () => {
+      ctx.revert();
       window.removeEventListener("resize", handleResize);
-      observer.disconnect();
     };
-  }, [isVisible]);
-
-  // Fonction séparée pour la timeline GSAP
-  const playAnimation = () => {
-    const tl = gsap.timeline();
-
-    tl.fromTo(
-      titleRef.current,
-      { opacity: 0, y: -20 },
-      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
-    );
-
-    tl.fromTo(
-      textRef.current,
-      { opacity: 0, y: -15 },
-      { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" },
-      "-=0.3"
-    );
-
-    tl.fromTo(
-      mapRef.current,
-      { opacity: 0, scale: 0.95 },
-      { opacity: 1, scale: 1, duration: 0.8, ease: "power1.out" }
-    );
-
-    tl.fromTo(
-      circleRef.current,
-      { opacity: 0, scale: 0.2 },
-      {
-        opacity: 1,
-        scale: 1,
-        duration: 1,
-        ease: "bounce.out",
-      }
-    );
-
-    tl.fromTo(
-      icon1Ref.current,
-      { y: 200, opacity: 0, rotate: -30 },
-      {
-        y: 0,
-        opacity: 1,
-        rotate: 0,
-        ease: "bounce.out",
-        duration: 1.2,
-      }
-    );
-
-    tl.fromTo(
-      icon2Ref.current,
-      { opacity: 0, scale: 0.8 },
-      { opacity: 0.5, scale: 1, duration: 0.5 },
-      "-=0.3"
-    );
-  };
+  }, []);
 
   return (
     <>
       <div className="map-container" id="map" ref={sectionRef}>
         <div className="descript-cont">
           {isMobile ? (
-            <p>
+            <p ref={textRef}>
               <span>📍 Adresse</span> GIC BONUS vous accueille à Bafoussam,
-              Ouest Cameroun, près de Total d’en haut, descente Akwa vers la
+              Ouest Cameroun, près de Total d'en haut, descente Akwa vers la
               Terrasse. Facilement accessible.
             </p>
           ) : (
-            <p ref={textRef}>
+            <p>
               <span>📍 Notre adresse</span> Retrouvez GIC BONUS à Bafoussam,
               région de l'Ouest Cameroun, à la Total d'en haut, descente Akwa,
               en direction de la Terrasse. Un emplacement stratégique pensé pour

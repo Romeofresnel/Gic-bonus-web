@@ -1,19 +1,20 @@
 .home-page-container {
   width: 100%;
-  height: 725px;
+  height: 100vh;
+  height: 100dvh;
   background: url(./pexel1.jpg) center/cover;
   // position: relative;
   z-index: 1;
+
   .container {
     width: 100%;
     height: 100%;
     position: relative;
-    background: linear-gradient(
-      to top,
-      rgba(0, 84, 165, 0.6),
-      rgba(255, 255, 255, 0.6)
-    );
+    background: linear-gradient(to top,
+        rgba(0, 84, 165, 0.6),
+        rgba(255, 255, 255, 0.6));
     display: block;
+
     nav {
       padding: 10px 20px;
       width: 100%;
@@ -27,18 +28,22 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       .logo {
         width: auto;
         display: flex;
         align-items: center;
+
         h1 {
           font-family: "font-1";
           margin-left: 10px;
           color: var(--text-principal);
         }
+
         .img-societe {
           width: 52px;
           height: 50px;
+
           img {
             width: 100%;
             height: 100%;
@@ -47,16 +52,20 @@
           }
         }
       }
+
       .link-nav {
         display: flex;
         align-items: center;
+
         .menu {
           display: none;
         }
+
         .link {
           ul {
             display: flex;
             list-style: none;
+
             a {
               text-decoration: none;
               width: auto;
@@ -66,6 +75,7 @@
               margin-right: 15px;
               letter-spacing: 1.2px;
               transition: all 200ms ease-out;
+
               &:hover {
                 margin-top: -5px;
                 cursor: pointer;
@@ -74,9 +84,11 @@
             }
           }
         }
+
         .mode {
           display: flex;
           align-items: center;
+
           svg {
             margin: 0 10px;
             width: 30px;
@@ -84,22 +96,26 @@
             color: var(--text-principal);
             cursor: pointer;
             transition: all 300ms ease-in;
+
             &:hover {
               transform: scale(1.1);
             }
           }
+
           .sun:hover {
             transform: scale(1.1) rotate(90deg);
           }
         }
       }
     }
+
     .home {
       width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
       padding: 0 20px;
+
       h1 {
         font-size: 45px;
         text-align: left;
@@ -109,15 +125,18 @@
         // color: var(--text-principal);
         line-height: 1.6;
         width: 70%;
+
         span {
           color: var(--color-secondary);
         }
       }
+
       .btns {
         width: auto;
         height: auto;
         margin-top: 30px;
         display: flex;
+
         a {
           padding: 12px 20px;
           border: none;
@@ -129,16 +148,19 @@
           color: var(--fond-principal);
           border-radius: 12px;
           transition: all 200ms ease-out;
+
           span {
             font-family: "font-1";
             letter-spacing: 1.2px;
             font-size: 20px;
             margin-left: 10px;
           }
+
           svg {
             width: 30px;
             height: 30px;
           }
+
           &:hover {
             background-color: var(--color-principal);
             cursor: pointer;
@@ -147,6 +169,7 @@
         }
       }
     }
+
     .circle {
       position: absolute;
       width: 451px;
@@ -157,27 +180,32 @@
       // border: 5px solid var(--text-principal);
       border-radius: 100%;
       right: -200px;
+
       .icon {
         position: relative;
         color: var(--fond-principal);
         animation: moveRotate 3s ease-in-out infinite;
         transition: all 200ms ease-out;
       }
+
       .one {
         top: 390px;
         left: 80px;
         rotate: -30deg;
       }
+
       .four {
         top: -12px;
         left: -100px;
         rotate: -10deg;
       }
+
       .two {
         top: 260px;
         right: 100px;
         rotate: 30deg;
       }
+
       .trois {
         top: 90px;
         right: 160px;
@@ -185,9 +213,11 @@
       }
     }
   }
+
   .a {
     display: none;
   }
+
   .vue {
     display: initial;
   }
@@ -197,60 +227,71 @@
   0% {
     transform: rotate(-25deg);
   }
+
   50% {
     transform: rotate(25deg);
   }
+
   100% {
     transform: rotate(-25deg);
   }
 }
+
 @media screen and (min-height: 850px) {
   .home-page-container {
     height: 950px;
   }
 }
+
 @media screen and (min-width: 300px) and (max-width: 767px) {
   .home-page-container {
-    min-height: 850px;
     .container {
       nav {
         padding: 30px 10px;
         height: 40px;
+
         .logo {
           h1 {
             font-size: 18px;
             letter-spacing: 1.2px;
             // display: none;
           }
+
           .img-societe {
             width: 42px;
             height: 40px;
           }
         }
+
         .link-nav {
           display: flex;
           align-items: center;
+
           .menu {
             display: initial;
 
             width: 30px;
             height: 30px;
           }
+
           svg {
             margin: 0 10px;
             width: 30px;
             height: 30px;
             color: var(--text-principal);
             cursor: pointer;
+
             &:hover {
               transform: scale(1.1);
             }
           }
+
           .link {
             ul {
               display: none;
             }
           }
+
           .mode {
             svg {
               margin: 0 0px;
@@ -260,10 +301,12 @@
           }
         }
       }
+
       .home {
         padding: 0 10px;
         align-items: center;
         justify-content: space-evenly;
+
         h1 {
           font-size: 35px;
           text-align: center;
@@ -271,31 +314,36 @@
           margin-top: 50px;
           width: 100%;
         }
+
         .btns {
           width: 100%;
           display: grid;
           grid-template-columns: 50% 50%;
           justify-content: center;
-          margin-top: -50px;
+
           a {
             padding: 12px 25px;
             width: 90%;
             margin-right: 10px;
             position: relative;
             left: 10px;
+
             span {
               font-size: 12px;
             }
           }
         }
       }
+
       .circle {
         display: none;
       }
     }
+
     a {
       text-decoration: none;
       color: var(--text-principal);
+
       .arrow {
         // display: initial;
         position: fixed;

@@ -7,183 +7,159 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Mail, Send } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Form from "../components/Form";
+import Portal from "../components/Portal";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Contact() {
   // Références pour les éléments à animer
+  const [aff, setAff] = useState(false)
   const mailIconRef = useRef(null);
   const contactTextRef = useRef(null);
   const formRef = useRef(null);
-  const navFootherRef = useRef(null);
   const sectionRef = useRef(null);
   const socialMediaRef = useRef(null);
   const securityRef = useRef(null);
   const navigationRef = useRef(null);
   const logoSectionRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !isVisible) {
-          setIsVisible(true);
-          playAnimation(); // <--- l'animation commence ici
-          observer.disconnect();
-        }
-      },
-      {
-        threshold: 0.4,
-        rootMargin: "0px",
-      }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [isVisible]);
-
-  const playAnimation = () => {
-    // Créer une timeline GSAP
-    const tl = gsap.timeline();
-
-    // 1. Animation de l'icône Mail - apparaît en premier
-    tl.fromTo(
-      mailIconRef.current,
-      {
+    const ctx = gsap.context(() => {
+      // 1. Cacher tous les éléments au départ
+      gsap.set([mailIconRef.current, contactTextRef.current], {
         opacity: 0,
         scale: 0,
-        // rotate: -180,
-        y: 50,
-      },
-      {
-        opacity: 1,
-        scale: 1,
-        // rotate: 0,
-        y: 10,
-        duration: 0.8,
-        ease: "back.out(1.7)",
+        y: 50
+      });
+
+      gsap.set(formRef.current, {
+        opacity: 0,
+        y: 50
+      });
+
+      gsap.set(logoSectionRef.current, {
+        opacity: 0,
+        y: 30
+      });
+
+      gsap.set([navigationRef.current, securityRef.current, socialMediaRef.current], {
+        opacity: 0,
+        x: -30
+      });
+
+      // Cacher les liens sociaux
+      const socialLinks = socialMediaRef.current?.querySelectorAll("a");
+      if (socialLinks) {
+        gsap.set(socialLinks, {
+          opacity: 0,
+          x: -20
+        });
       }
-    );
 
-    // 2. Animation du texte "Contactez-nous" - sort de l'icône
-    tl.fromTo(
-      contactTextRef.current,
-      {
-        opacity: 0,
-        scale: 0,
-        // width: 0,
-      },
-      {
-        opacity: 1,
-        scale: 1,
-        // width: "auto",
-        duration: 0.7,
-        ease: "power2.out",
-      }
-    );
+      // 2. Animation principale déclenchée par ScrollTrigger
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top 80%",
+        onEnter: () => {
+          const tl = gsap.timeline();
 
-    // 3. Animation du formulaire
-    tl.fromTo(
-      formRef.current,
-      {
-        opacity: 0,
-        y: 50,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power1.out",
-      }
-    );
+          // 1. Animation de l'icône Mail - apparaît en premier
+          tl.to(mailIconRef.current, {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+          });
 
-    // 4. Animation du logo et du texte descriptif
-    tl.fromTo(
-      logoSectionRef.current,
-      {
-        opacity: 0,
-        y: 30,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        ease: "power2.out",
-      }
-    );
+          // 2. Animation du texte "Contactez-nous" - sort de l'icône
+          tl.to(contactTextRef.current, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.7,
+            ease: "power2.out",
+          }, "-=0.4");
 
-    // 5. Animation des nav-foother - en séquence
-    tl.fromTo(
-      navigationRef.current,
-      {
-        opacity: 0,
-        x: -30,
-      },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 0.6,
-        ease: "power1.out",
-      }
-    );
+          // 3. Animation du formulaire
+          tl.to(formRef.current, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power1.out",
+          }, "-=0.2");
 
-    tl.fromTo(
-      securityRef.current,
-      {
-        opacity: 0,
-        x: -30,
-      },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 0.6,
-        ease: "power1.out",
-      },
-      "-=0.3" // commence légèrement avant la fin de l'animation précédente
-    );
+          // 4. Animation du logo et du texte descriptif
+          tl.to(logoSectionRef.current, {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power2.out",
+          }, "-=0.3");
 
-    tl.fromTo(
-      socialMediaRef.current,
-      {
-        opacity: 0,
-        x: -30,
-      },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 0.6,
-        ease: "power1.out",
-      },
-      "-=0.3" // commence légèrement avant la fin de l'animation précédente
-    );
+          // 5. Animation des nav-footer - en séquence
+          tl.to(navigationRef.current, {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            ease: "power1.out",
+          }, "-=0.2");
 
-    // Animation des liens sociaux avec un délai entre chaque
-    const socialLinks = socialMediaRef.current.querySelectorAll("a");
-    tl.fromTo(
-      socialLinks,
-      {
-        opacity: 0,
-        x: -20,
-      },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 0.4,
-        stagger: 0.1, // décalage entre chaque élément
-        ease: "power1.out",
-      }
-    );
+          tl.to(securityRef.current, {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            ease: "power1.out",
+          }, "-=0.3");
 
-    // Nettoyer la timeline lors du démontage du composant
-    return () => {
-      tl.kill();
-    };
-  };
+          tl.to(socialMediaRef.current, {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            ease: "power1.out",
+          }, "-=0.3");
 
+          // Animation des liens sociaux avec un délai entre chaque
+          if (socialLinks) {
+            tl.to(socialLinks, {
+              opacity: 1,
+              x: 0,
+              duration: 0.4,
+              stagger: 0.1,
+              ease: "power1.out",
+            }, "-=0.2");
+          }
+        },
+        once: true
+      });
+
+      // Animation flottante pour l'icône mail
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top 80%",
+        onEnter: () => {
+          gsap.to(mailIconRef.current, {
+            y: "+=5",
+            duration: 2,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            delay: 1.5
+          });
+        },
+        once: true
+      });
+
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+  function handleClose() {
+    setAff(false);
+    formRef.current.reset(); // Réinitialiser le formulaire si nécessaire
+  }
   return (
     <>
       <footer className="conctact-container" id="contact" ref={sectionRef}>
@@ -218,7 +194,6 @@ export default function Contact() {
             <div className="nav-foother" ref={navigationRef}>
               <h4>Navigation</h4>
               <hr />
-
               <ul>
                 <a href="#accueil">Acceuil</a>
                 <a href="#propos">A Propos</a>
@@ -240,9 +215,8 @@ export default function Contact() {
             <div className="nav-foother" ref={socialMediaRef}>
               <h4>Social Media</h4>
               <hr />
-
               <ul>
-                <a href="#">
+                <a href="https://wa.me/237620661852?text=Bonjour%20je%20souhaite%20plus%20d'informations" target="_blank">
                   <FontAwesomeIcon icon={faWhatsapp} />
                   <span>Whatsapp</span>
                 </a>
@@ -262,6 +236,22 @@ export default function Contact() {
             </div>
           </div>
         </div>
+        <div className="mobile">
+          <div className="sec">
+            <p>© {new Date().getFullYear()} GIC BONUS. Tous droits réservés.</p>
+          </div>
+          <div className="liens">
+            <ul>
+              <a href="#accueil">Acceuil</a>
+              <a href="#propos">A Propos</a>
+              <a href="#services">Nos services</a>
+              <a href="#temoignage">Temoignage</a>
+              <a href="#map">Localisation</a>
+              <a onClick={() => setAff(true)}>Contact</a>
+            </ul>
+          </div>
+        </div>
+        {aff && <Form aff={handleClose} formRef={formRef} />}
       </footer>
     </>
   );

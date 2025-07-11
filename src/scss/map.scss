@@ -7,12 +7,14 @@
   background-color: var(--fond-map);
   position: relative;
   overflow: hidden;
+
   .map-cont {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: right;
     flex-direction: column;
+
     h1 {
       font-size: 60px;
       font-family: "font-1";
@@ -22,6 +24,7 @@
       top: -30px;
       text-align: right;
     }
+
     .card-map {
       width: 95%;
       height: 380px;
@@ -37,6 +40,7 @@
       }
     }
   }
+
   .descript-cont {
     width: 100%;
     height: 100%;
@@ -44,6 +48,7 @@
     align-items: center;
     color: var(--text-principal);
     z-index: 2;
+
     p {
       text-align: left;
       font-family: "font-2";
@@ -51,6 +56,8 @@
       font-size: 20px;
       line-height: 35px;
       width: 100%;
+      opacity: 1;
+
       span {
         font-family: "font-1";
         display: block;
@@ -59,6 +66,7 @@
       }
     }
   }
+
   .fa-location-dot {
     font-size: 53px;
     color: var(--color-secondary);
@@ -68,6 +76,7 @@
     background: none;
     z-index: 2;
   }
+
   .one {
     font-size: 53px;
     color: rgba(34, 34, 34, 0.877);
@@ -78,6 +87,7 @@
     filter: blur(2px);
     z-index: 1;
   }
+
   .circle {
     position: absolute;
     width: 250px;
@@ -88,6 +98,7 @@
     left: -60px;
     z-index: 1;
   }
+
   // .main-icon {
   //   font-size: 53px;
   //   color: var(--color-secondary);
@@ -107,6 +118,7 @@
   //   z-index: -1;
   // }
 }
+
 @media screen and (min-width: 300px) and (max-width: 767px) {
   .map-container {
     width: 100%;
@@ -115,30 +127,37 @@
     flex-direction: column-reverse;
     padding: 10px 15px 40px 15px;
     position: relative;
+
     .descript-cont {
       width: 100%;
       text-align: center;
+
       p {
         margin-top: 0px;
         text-align: center;
+
         span {
           margin-bottom: 10px;
         }
       }
     }
+
     .map-cont {
       margin-top: 40px;
+
       h1 {
         font-size: 40px;
         text-align: center;
         // width: 100%;
       }
+
       .card-map {
         margin-left: 8px;
         margin-top: 30px;
         height: 250px;
       }
     }
+
     .fa-location-dot {
       font-size: 53px;
       bottom: 500px;
@@ -146,6 +165,7 @@
       bottom: 0px;
       top: 160px;
     }
+
     .one {
       font-size: 53px;
       bottom: 500px;

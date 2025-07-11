@@ -5,6 +5,7 @@
   position: relative;
   z-index: 2;
   overflow: hidden;
+
   .container {
     width: 100%;
     height: auto;
@@ -14,6 +15,7 @@
     justify-content: center;
     padding: 40px 20px;
     position: relative;
+
     .section-title {
       font-size: 60px;
       font-family: "font-1";
@@ -37,6 +39,7 @@
       height: auto;
       gap: 30px;
       margin-top: -20px;
+
       .service-card {
         background-color: var(--card-service);
         border-radius: 8px;
@@ -49,11 +52,13 @@
         position: relative;
         z-index: 2;
         overflow: hidden;
+
         &:hover {
           transform: translateY(-10px);
           box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
       }
+
       .circle-1 {
         position: absolute;
         background-color: var(--color-secondary);
@@ -65,6 +70,7 @@
         z-index: 1;
         right: -20px;
       }
+
       .container-blur {
         width: 100%;
         height: 100%;
@@ -73,6 +79,7 @@
         border-radius: 8px;
         padding: 32px;
         backdrop-filter: blur(50px);
+
         .service-header {
           display: flex;
           align-items: center;
@@ -162,6 +169,7 @@
       }
     }
   }
+
   .circle {
     position: absolute;
     z-index: 1;
@@ -171,10 +179,12 @@
     border: 5px solid var(--color-secondary);
     border-radius: 100%;
   }
+
   .one {
     bottom: -50px;
     right: -150px;
   }
+
   .two {
     top: -90px;
     left: -110px;
@@ -184,24 +194,30 @@
 @media screen and (min-width: 300px) and (max-width: 767px) {
   .services-section {
     height: auto;
+
     .container {
       padding: 10px 16px 100px 16px;
+
       .section-title {
         margin-bottom: 20px;
         font-size: 50px;
         z-index: 2;
       }
+
       .section-subtitle {
         margin-bottom: 20px;
         z-index: 2;
       }
+
       .services-grid {
         width: 100%;
         height: auto;
         flex-direction: column;
+
         .service-card {
           width: 100%;
           height: auto;
+
           .container-blur {
             padding: 32px 32px 50px 32px;
             width: 100%;
@@ -209,13 +225,16 @@
         }
       }
     }
+
     .circle {
       width: 220px;
       height: 220px;
     }
+
     .one {
       right: -90px;
     }
+
     .two {
       left: -120px;
       top: 70px;
