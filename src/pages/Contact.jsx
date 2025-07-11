@@ -70,7 +70,7 @@ export default function Contact() {
           tl.to(mailIconRef.current, {
             opacity: 1,
             scale: 1,
-            y: 0,
+            y: 10,
             duration: 0.8,
             ease: "back.out(1.7)",
           });
@@ -79,6 +79,7 @@ export default function Contact() {
           tl.to(contactTextRef.current, {
             opacity: 1,
             scale: 1,
+            y: 0,
             duration: 0.7,
             ease: "power2.out",
           }, "-=0.4");

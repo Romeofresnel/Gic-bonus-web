@@ -190,15 +190,19 @@
 
     .right-panel {
       width: 100% !important;
+
+      display: flex !important;
       display: flex !important;
       align-items: center;
       flex-direction: column;
+
       .testimonials-swiper {
         height: auto !important;
         padding: 0 !important;
         overflow: visible !important;
         // display: flex;
         // align-items: center;
+
         // FORCER L'AFFICHAGE DE TOUS LES SLIDES SUR MOBILE
         .swiper-slide {
           opacity: 1 !important;
@@ -255,6 +259,7 @@
               .testimonial-content {
                 text-align: center !important;
                 width: 100% !important;
+
                 section {
                   justify-content: center !important;
                   flex-direction: column !important;
